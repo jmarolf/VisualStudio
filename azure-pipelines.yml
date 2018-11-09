@@ -20,6 +20,8 @@ steps:
 
 - script: ssh-add -l
 
+- script: ssh -vvvT git@github.com
+
 - script: git submodule update --init --force
 
 - task: NuGetToolInstaller@0
