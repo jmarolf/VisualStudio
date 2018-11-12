@@ -80,7 +80,7 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>true</RunCodeAnalysis>
     <CreateVsixContainer>True</CreateVsixContainer>
-    <DeployExtension>False</DeployExtension>
+    <DeployExtension>True</DeployExtension>
     <OutputPath>..\..\build\Release\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseWithoutVsix|AnyCPU' ">
