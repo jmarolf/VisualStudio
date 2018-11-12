@@ -19,6 +19,7 @@ steps:
     sshKeySecureFile: id_rsa
 
 - script: git submodule update --init --force
+  displayName: Submodule init
 
 # Can't use the NuGet tasks because of https://github.com/Microsoft/azure-pipelines-tasks/issues/6790
 #- task: NuGetToolInstaller@0
@@ -30,6 +31,7 @@ steps:
 
 # Instead run nuget manually.
 - script: tools\nuget\nuget.exe restore
+  displayName: NuGet restore
 
 - task: VSBuild@1
   inputs:
