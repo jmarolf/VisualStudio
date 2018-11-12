@@ -20,14 +20,16 @@ steps:
 
 - script: git submodule update --init --force
 
-- task: NuGetToolInstaller@0
+# Can't use the NuGet tasks because of https://github.com/Microsoft/azure-pipelines-tasks/issues/6790
+#- task: NuGetToolInstaller@0
+#- task: NuGetCommand@2
+#  inputs:
+#    restoreSolution: '$(solution)'
+#    feedsToUse: 'config'
+#    nugetConfigPath: nuget.config
 
-- task: NuGetCommand@1
-  inputs:
-    restoreSolution: '$(solution)'
-    feedsToUse: 'config'
-    nugetConfigPath: nuget.config
-    basePath: $(Build.Repository.LocalPath)
+# Instead run nuget manually.
+- script: tools\nuget\nuget.exe restore
 
 - task: VSBuild@1
   inputs:
