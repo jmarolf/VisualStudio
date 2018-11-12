@@ -93,14 +93,6 @@
     <CreateVsixContainer>False</CreateVsixContainer>
     <DeployExtension>False</DeployExtension>
     <OutputPath>..\..\build\Release\</OutputPath>
-  <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'">
-    <!-- Only deploy extension when building inside Visual Studio -->
-    <DeployExtension>false</DeployExtension>
-  </PropertyGroup>  
-  <PropertyGroup Condition="$(Buildtype) == 'Internal'">
-    <AssemblyOriginatorKeyFile>..\..\script\Key.snk</AssemblyOriginatorKeyFile>
-    <SignAssembly>true</SignAssembly>
-    <DelaySign>false</DelaySign>
   </PropertyGroup>
   <Import Project="..\common\signing.props" />
   <ItemGroup>
