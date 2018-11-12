@@ -22,7 +22,7 @@ steps:
 
 - task: NuGetToolInstaller@0
 
-- task: NuGetCommand@2
+- task: NuGetCommand@1
   inputs:
     restoreSolution: '$(solution)'
     feedsToUse: 'config'
