@@ -43,3 +43,8 @@ steps:
   inputs:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: '$(Build.SourcesDirectory)\build\Release\GitHub.VisualStudio.vsix' 
+    artifactName: 'vsix' 
