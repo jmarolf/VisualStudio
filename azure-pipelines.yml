@@ -53,6 +53,7 @@ steps:
     searchFolder: '$(Build.SourcesDirectory)\test'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
+    diagnosticsEnabled: true
 
 - task: PublishBuildArtifacts@1
   inputs:
