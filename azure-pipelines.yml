@@ -35,8 +35,11 @@ steps:
 
 # Ideally we'd run NerdBank.GitVersioning but that will come later. For now bump the
 # version with the azure releaseId
-- script: scripts\Bump-Version.ps1 -BumpBuild -BuildNumber:$(Build.BuildId)
-  displayName: Bump version
+- task: PowerShell@2
+  inputs:
+    targetType: filePath
+    filePath: '$(Build.SourcesDirectory)\scripts\Bump-Version.ps1'
+    arguments: -BumpBuild -BuildNumber:$(Build.BuildId)
 
 - task: VSBuild@1
   inputs:
