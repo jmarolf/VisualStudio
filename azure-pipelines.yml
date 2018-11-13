@@ -40,6 +40,7 @@ steps:
     targetType: filePath
     filePath: '$(Build.SourcesDirectory)\scripts\Bump-Version.ps1'
     arguments: -BumpBuild -BuildNumber:$(Build.BuildId)
+    displayName: Bump version
 
 - task: VSBuild@1
   inputs:
