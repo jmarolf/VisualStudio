@@ -41,6 +41,7 @@ steps:
 
 - task: VSTest@2
   inputs:
+    testAssemblyVer2: '$(Build.SourcesDirectory)\test\**'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
 
