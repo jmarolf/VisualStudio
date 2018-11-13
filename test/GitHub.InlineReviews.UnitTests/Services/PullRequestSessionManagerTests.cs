@@ -172,7 +172,6 @@ namespace GitHub.InlineReviews.UnitTests.Services
             }
 
             [Test]
-            [Ignore("Flaky test on Azure Pipelines. Need to to investigate.")]
             public void RepoChangedHandlesNullRepository()
             {
                 var teamExplorerContext = CreateTeamExplorerContext(CreateRepositoryModel());
