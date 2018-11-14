@@ -51,7 +51,7 @@ steps:
 - task: VSTest@2
   inputs:
     searchFolder: '$(Build.SourcesDirectory)\test'
-    testAssemblyVer2: '!**\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll'
+    testAssemblyVer2: '**\*Tests.dll'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     diagnosticsEnabled: true
