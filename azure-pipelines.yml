@@ -51,7 +51,7 @@ steps:
 - task: VSTest@2
   inputs:
     searchFolder: '$(Build.SourcesDirectory)\test'
-    testAssemblyVer2: '**\*Tests.dll'
+    testAssemblyVer2: '**\bin\**\*Tests.dll'
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     diagnosticsEnabled: true
