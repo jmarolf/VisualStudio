@@ -55,6 +55,7 @@ steps:
     platform: '$(buildPlatform)'
     configuration: '$(buildConfiguration)'
     diagnosticsEnabled: true
+    runSettingsFile: '$(Build.SourcesDirectory)\test\test.runsettings'
 
 - task: PublishBuildArtifacts@1
   inputs:
