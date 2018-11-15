@@ -12,8 +12,6 @@ namespace GitHub.VisualStudio.Commands
     [Export(typeof(IOpenFromClipboardCommand))]
     public class OpenFromClipboardCommand : VsCommand<string>, IOpenFromClipboardCommand
     {
-
-
         readonly Lazy<IGitHubContextService> gitHubContextService;
         readonly Lazy<ITeamExplorerContext> teamExplorerContext;
         readonly Lazy<IVSServices> vsServices;
@@ -52,7 +50,16 @@ namespace GitHub.VisualStudio.Commands
 
         public override async Task Execute(string url)
         {
-            var context = gitHubContextService.Value.FindContextFromClipboard();
+            GitHubContext context;
+            if (!string.IsNullOrEmpty(url))
+            {
+                context = gitHubContextService.Value.FindContextFromUrl(url);
+            }
+            else
+            {
+                context = gitHubContextService.Value.FindContextFromClipboard();
+            }
+
             if (context == null)
             {
                 vsServices.Value.ShowMessageBoxInfo(Resources.NoGitHubUrlMessage);

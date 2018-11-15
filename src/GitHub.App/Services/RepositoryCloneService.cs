@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;
-using System.IO;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using GitHub.Api;
+using GitHub.Commands;
 using GitHub.Extensions;
 using GitHub.Helpers;
 using GitHub.Logging;
@@ -36,6 +36,7 @@ namespace GitHub.Services
         readonly IVSGitServices vsGitServices;
         readonly ITeamExplorerServices teamExplorerServices;
         readonly IGraphQLClientFactory graphqlFactory;
+        readonly IOpenFromClipboardCommand openFromClipboardCommand;
         readonly IUsageTracker usageTracker;
         ICompiledQuery<ViewerRepositoriesModel> readViewerRepositories;
 
@@ -45,12 +46,14 @@ namespace GitHub.Services
             IVSGitServices vsGitServices,
             ITeamExplorerServices teamExplorerServices,
             IGraphQLClientFactory graphqlFactory,
+            IOpenFromClipboardCommand openFromClipboardCommand,
             IUsageTracker usageTracker)
         {
             this.operatingSystem = operatingSystem;
             this.vsGitServices = vsGitServices;
             this.teamExplorerServices = teamExplorerServices;
             this.graphqlFactory = graphqlFactory;
+            this.openFromClipboardCommand = openFromClipboardCommand;
             this.usageTracker = usageTracker;
 
             defaultClonePath = GetLocalClonePathFromGitProvider(operatingSystem.Environment.GetUserRepositoriesPath());
@@ -153,6 +156,9 @@ namespace GitHub.Services
 
             // Give user a chance to choose a solution
             teamExplorerServices.ShowHomePage();
+
+            // Navigate to file and line
+            await (openFromClipboardCommand as IVsCommand<string>).Execute(url);
         }
 
         /// <inheritdoc/>
