@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.ComponentModel.Composition;
 using GitHub.Commands;
 using GitHub.Exports;
@@ -13,7 +14,7 @@ namespace GitHub.VisualStudio.Commands
     public class OpenFromClipboardCommand : VsCommand<string>, IOpenFromClipboardCommand
     {
         readonly Lazy<IGitHubContextService> gitHubContextService;
-        readonly Lazy<ITeamExplorerContext> teamExplorerContext;
+        readonly Lazy<IVSGitExt> gitExt;
         readonly Lazy<IVSServices> vsServices;
         readonly Lazy<IGitService> gitService;
         readonly Lazy<UIContext> uiContext;
@@ -31,13 +32,13 @@ namespace GitHub.VisualStudio.Commands
         [ImportingConstructor]
         public OpenFromClipboardCommand(
             Lazy<IGitHubContextService> gitHubContextService,
-            Lazy<ITeamExplorerContext> teamExplorerContext,
+            Lazy<IVSGitExt> gitExt,
             Lazy<IVSServices> vsServices,
             Lazy<IGitService> gitService)
             : base(CommandSet, CommandId)
         {
             this.gitHubContextService = gitHubContextService;
-            this.teamExplorerContext = teamExplorerContext;
+            this.gitExt = gitExt;
             this.vsServices = vsServices;
             this.gitService = gitService;
 
@@ -73,7 +74,7 @@ namespace GitHub.VisualStudio.Commands
                 return;
             }
 
-            var activeRepository = teamExplorerContext.Value.ActiveRepository;
+            var activeRepository = gitExt.Value.ActiveRepositories.FirstOrDefault();
             var repositoryDir = activeRepository?.LocalPath;
             if (repositoryDir == null)
             {
